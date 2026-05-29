@@ -63,24 +63,66 @@ h1{font-size:20px;font-weight:600;margin-bottom:.25rem;color:#0c3d78}
   .header{padding:10px 1rem}
   .header img{height:38px}
   h1{font-size:17px}
+
+  /* Campos de dos columnas en una sola */
   .row2{grid-template-columns:1fr}
   .row3{grid-template-columns:1fr}
+
+  /* Ocultar label del progreso */
   .plabel{display:none}
-  .rpill{font-size:12px;padding:6px 10px}
-  /* Checklist tramites: nombre ocupa fila completa, checkboxes abajo */
+
+  /* Pills centrados y con borde visible */
+  .rgroup{justify-content:center;gap:10px}
+  .rpill{
+    font-size:13px;
+    padding:8px 16px;
+    border:1.5px solid #ddd;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    min-width:80px;
+    justify-content:center;
+  }
+  .rpill.on{border-color:#0c3d78;background:#e8eef8;color:#0c3d78}
+
+  /* Miembro card en mobile */
+  .miembro{margin-bottom:12px}
+  .miembro .row3{display:flex;flex-direction:column;gap:8px}
+  .miembro .row3 input{width:100%}
+
+  /* Checklist tramites */
   .col-hdr{display:none}
-  .trow{grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:auto auto;gap:6px;padding:12px 0}
-  .trow .tn{grid-column:1/-1;font-size:13px;font-weight:500;padding-bottom:4px;border-bottom:1px solid #f0f0ee}
-  .trow input[type=checkbox]{width:22px;height:22px;margin:0 auto}
+  .trow{
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    grid-template-rows:auto auto;
+    gap:6px;
+    padding:12px 0;
+  }
+  .trow .tn{
+    grid-column:1/-1;
+    font-size:13px;
+    font-weight:500;
+    padding-bottom:6px;
+    border-bottom:1px solid #f0f0ee;
+    margin-bottom:2px;
+  }
   .trow div{display:flex;flex-direction:column;align-items:center;gap:4px}
   .trow div::before{font-size:10px;color:#888;text-align:center}
   .trow div:nth-child(2)::before{content:'Acta'}
   .trow div:nth-child(3)::before{content:'Mejoras'}
   .trow div:nth-child(4)::before{content:'Instructivo'}
   .trow div:nth-child(5)::before{content:'Socializ.'}
+  .trow input[type=checkbox]{width:24px;height:24px;margin:0 auto}
+
+  /* Observaciones */
   .omini{font-size:13px}
+
+  /* Botones */
   .btnp,.btns{padding:10px 16px;font-size:13px}
   .nav{gap:8px}
+
+  /* Avatar institucion */
   .iavt{width:36px;height:36px;font-size:11px}
 }
 </style>
