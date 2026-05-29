@@ -142,6 +142,12 @@ h1{font-size:20px;font-weight:600;margin-bottom:.25rem;color:#0c3d78}
           <label class="rpill"><input type="radio" name="personal" value="Parcialmente"> Parcialmente</label>
         </div>
       </div>
+      <div id="personal-wrap" style="display:none">
+        <div class="field">
+          <label>Indique las razones por las que no cuenta con personal técnico</label>
+          <textarea id="personal-obs" placeholder="Describa la situación del personal técnico..."></textarea>
+        </div>
+      </div>
       <div class="field">
         <label>¿Requiere acompañamiento o talleres de transferencia de capacidades?</label>
         <div class="rgroup" id="rg-acomp">
@@ -271,8 +277,16 @@ function pill(input) {
   for (var i = 0; i < pills.length; i++) pills[i].classList.remove('on');
   input.closest('.rpill').classList.add('on');
   var name = input.name;
-  if (name === 'migrada') document.getElementById('lim-wrap').style.display = input.value === 'No' ? 'block' : 'none';
-  if (name === 'acomp') document.getElementById('acomp-wrap').style.display = input.value === 'Si' ? 'block' : 'none';
+  var val = input.value;
+  if (name === 'migrada') {
+    document.getElementById('lim-wrap').style.display = val === 'No' ? 'block' : 'none';
+  }
+  if (name === 'personal') {
+    document.getElementById('personal-wrap').style.display = val === 'No' ? 'block' : 'none';
+  }
+  if (name === 'acomp') {
+    document.getElementById('acomp-wrap').style.display = val === 'Sí' ? 'block' : 'none';
+  }
 }
 
 function addRow() {
@@ -344,9 +358,35 @@ function buildResumen() {
 }
 
 function goStep(n) {
+  if (n >= 2) {
+    // Institucion
+    if (!getVal('inst')) { alert('Por favor seleccione una institucion.'); return; }
+    // Encargado
+    if (!getVal('enc')) { alert('Por favor ingrese el nombre del encargado.'); return; }
+    // Correo
+    if (!getVal('cor')) { alert('Por favor ingrese el correo institucional.'); return; }
+    // Estado actual (radio)
+    if (!document.querySelector('[name=estado]:checked')) { alert('Por favor seleccione el estado actual de los tramites.'); return; }
+    // SOL migrada (radio)
+    if (!document.querySelector('[name=migrada]:checked')) { alert('Por favor indique si la plataforma SOL fue migrada.'); return; }
+    // Limitante si selecciono No
+    var migVal = document.querySelector('[name=migrada]:checked').value;
+    if (migVal === 'No' && !getVal('limitante')) { alert('Por favor seleccione la principal limitante para la migracion.'); return; }
+    // Personal tecnico (radio)
+    if (!document.querySelector('[name=personal]:checked')) { alert('Por favor indique si la institucion cuenta con personal tecnico.'); return; }
+    // Acompanamiento (radio)
+    if (!document.querySelector('[name=acomp]:checked')) { alert('Por favor indique si requiere acompanamiento.'); return; }
+    // Habilidades si selecciono Si
+    var acompVal = document.querySelector('[name=acomp]:checked').value;
+    if (acompVal === 'Sí' && !getVal('habilidades')) { alert('Por favor seleccione el tipo de habilidades requeridas.'); return; }
+    // Al menos un miembro en equipo institucional
+    var tieneEquipo = false;
+    for (var i = 1; i <= eqN; i++) {
+      if (getVal('ef'+i) || getVal('en'+i) || getVal('ec'+i)) { tieneEquipo = true; break; }
+    }
+    if (!tieneEquipo) { alert('Por favor agregue al menos un miembro al equipo institucional de digitalizacion.'); return; }
+  }
   var inst = getVal('inst');
-  if (n >= 2 && !inst) { alert('Por favor seleccione una institucion.'); return; }
-  if (n >= 2 && !getVal('enc')) { alert('Por favor ingrese el nombre del encargado.'); return; }
   if (n === 2) buildTramites(inst);
   if (n === 3) buildResumen();
   var steps = document.querySelectorAll('.step');
