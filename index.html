@@ -53,6 +53,33 @@ h1{font-size:20px;font-weight:600;margin-bottom:.25rem;color:#0c3d78}
 .okbox{text-align:center;padding:3rem 1rem}
 .okbox h2{font-size:22px;font-weight:600;margin-bottom:.5rem}
 .okbox p{color:#666;font-size:14px;max-width:420px;margin:0 auto 1.5rem}
+
+@media (max-width: 600px) {
+  .container{padding:1rem .75rem}
+  .card{padding:1rem}
+  .header{padding:10px 1rem}
+  .header img{height:38px}
+  h1{font-size:17px}
+  .row2{grid-template-columns:1fr}
+  .row3{grid-template-columns:1fr}
+  .plabel{display:none}
+  .rpill{font-size:12px;padding:6px 10px}
+  /* Checklist tramites: nombre ocupa fila completa, checkboxes abajo */
+  .col-hdr{display:none}
+  .trow{grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:auto auto;gap:6px;padding:12px 0}
+  .trow .tn{grid-column:1/-1;font-size:13px;font-weight:500;padding-bottom:4px;border-bottom:1px solid #f0f0ee}
+  .trow input[type=checkbox]{width:22px;height:22px;margin:0 auto}
+  .trow div{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .trow div::before{font-size:10px;color:#888;text-align:center}
+  .trow div:nth-child(2)::before{content:'Acta'}
+  .trow div:nth-child(3)::before{content:'Mejoras'}
+  .trow div:nth-child(4)::before{content:'Instructivo'}
+  .trow div:nth-child(5)::before{content:'Socializ.'}
+  .omini{font-size:13px}
+  .btnp,.btns{padding:10px 16px;font-size:13px}
+  .nav{gap:8px}
+  .iavt{width:36px;height:36px;font-size:11px}
+}
 </style>
 </head>
 <body>
